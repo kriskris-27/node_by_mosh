@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev:watch":"nodemon --watch src --ext ts --exec \"npx ts-node src/index.ts\"",
+    "dev:watch": "nodemon --watch src --ext ts --exec \"npx ts-node src/index.ts\"",
     "prestart": "npm run build"
   },
   "keywords": [],
@@ -15,11 +15,13 @@
   "type": "commonjs",
   "dependencies": {
     "express": "^5.1.0",
+    "joi": "^17.13.3",
     "mongoose": "^8.16.1",
     "nodemon": "^3.1.10"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/joi": "^17.2.2",
     "@types/node": "^24.0.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"

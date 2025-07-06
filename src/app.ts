@@ -1,6 +1,8 @@
+import Joi from "joi";
 import express, { Request, Response } from "express";
 const app = express();
 
+app.use(express.json())
 const courses = [
     {id:1,name:'course1'},
     {id:2,name:'course2'},
@@ -20,6 +22,24 @@ app.get('/api/courses/:id',(req:Request,res:Response)=>{
     if(!course) res.status(404).send('The course with given id was not found');
 
     res.send(course)
+})
+
+app.post('/api/courses',(req:Request,res:Response)=>{
+    const schema = Joi.object({
+        name:Joi.string().min(3).required()
+    })
+    const result =  schema.validate(req.body)
+    console.log(result)
+    if(!req.body.name || req.body.name.length < 3 ){
+        res.status(400).send('Name invalid');
+        return
+    }
+    const course= {
+        id:courses.length+1,
+        name:req.body.name
+    };
+    courses.push(course);
+    res.send(course);
 })
 
 
