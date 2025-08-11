@@ -51,6 +51,20 @@ const schema = Joi.object({
         return   schema.validate(course)
         
 }
+
+app.delete('/api/courses/:id',(req:Request , res:Response)=>{
+    const course = courses.find(c => c.id ===parseInt(req.params.id))
+    if(!course) {
+        res.status(404).send('The course with the given ID was not found');
+        return;
+    }
+       
+    const index=courses.indexOf(course);
+    courses.splice(index,1);
+
+    res.send(course)
+     
+})
 app.post('/api/courses',(req:Request,res:Response)=>{
     
     const { error } = validateCourse(req.body)
